@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/Coursereg")
-@CrossOrigin(origins = "http://127.0.0.1:5500")
+@CrossOrigin(origins = "*")
 public class Coursecontroller {
     @Autowired
     private Courseservice cs;
