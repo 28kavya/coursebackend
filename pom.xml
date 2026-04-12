@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Course-registration</artifactId>
+	<artifactId>course-registration</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Course-registration</name>
 	<description>Demo project for Spring Boot</description>
@@ -56,6 +56,8 @@
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
         </dependency>
+
+
     </dependencies>
 
 	<build>
