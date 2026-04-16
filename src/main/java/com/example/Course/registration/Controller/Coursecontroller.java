@@ -4,6 +4,7 @@ import com.example.Course.registration.Model.Course;
 import com.example.Course.registration.Model.Registry;
 import com.example.Course.registration.Service.Courseservice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,10 @@ import java.util.List;
 public class Coursecontroller {
     @Autowired
     private Courseservice cs;
+    @GetMapping("/api/health")
+    public ResponseEntity<String> health() {
+        return ResponseEntity.ok("Server is running");
+    }
     @GetMapping("/courses")
     public List<Course> avaiablecourse(){
         return cs.getCourses();
