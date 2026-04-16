@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class Course {
     @Id
-    private  String courseid;
-    private  String coursename;
+    private String courseid;
+    private String coursename;
     private String trainer;
     private int duration;
 }

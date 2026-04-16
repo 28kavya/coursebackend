@@ -1,9 +1,6 @@
 package com.example.Course.registration.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,14 +12,19 @@ import lombok.NoArgsConstructor;
 public class Registry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;//no need to provide value for id....
+    private Long id;
+
     private String name;
     private String email;
-    private String coursename;
 
-    public Registry(String name, String coursename, String email) {
+    // Create a foreign key relationship to Course
+    @ManyToOne
+    @JoinColumn(name = "courseid", referencedColumnName = "courseid")
+    private Course course;
+
+    public Registry(String name, Course course, String email) {
         this.name = name;
         this.email = email;
-        this.coursename = coursename;
+        this.course = course;
     }
 }
