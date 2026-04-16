@@ -23,8 +23,11 @@ public class Courseservice {
         return regrepo.findAll();
     }
 
-    public void enrollCourses(String name, String email, String coursename) {
-        Registry r = new Registry(name,coursename,email);
+    public void enrollCourses(String name, String email, String courseid) {
+        Course course = cr.findById(courseid)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        Registry r = new Registry(name, course, email); // ✅ correct
         regrepo.save(r);
     }
 
