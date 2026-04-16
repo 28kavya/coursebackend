@@ -27,7 +27,7 @@ public class Courseservice {
         Course course = cr.findById(courseid)
                 .orElseThrow(() -> new RuntimeException("Course not found"));
 
-        Registry r = new Registry(name, course, email); // ✅ correct
+        Registry r = new Registry(name, course, email);
         regrepo.save(r);
     }
 
