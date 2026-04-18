@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")  // Allow requests from frontend
+@CrossOrigin(origins = "*", allowedHeaders = "*") // Allow requests from frontend
 public class Coursecontroller {
 
     @Autowired
