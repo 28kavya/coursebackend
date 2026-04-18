@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
 public class Registry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
