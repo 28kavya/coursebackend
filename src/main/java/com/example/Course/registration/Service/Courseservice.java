@@ -62,7 +62,7 @@ public class Courseservice {
      * @return List of registries for that course
      */
     public List<Registry> getEnrollmentsByCourse(String courseid) {
-        return registryRepository.findByCourseId(courseid);  // FIXED METHOD NAME
+        return registryRepository.findByCourseId(courseid);
     }
 
     /**
@@ -81,6 +81,15 @@ public class Courseservice {
      */
     public List<Registry> getEnrollmentsByName(String name) {
         return registryRepository.findByNameContainingIgnoreCase(name);
+    }
+
+    /**
+     * Get a specific enrollment by ID
+     * @param registryId Registry ID
+     * @return Optional containing the registry if found
+     */
+    public Optional<Registry> getEnrollmentById(Long registryId) {
+        return registryRepository.findById(registryId);
     }
 
     /**
