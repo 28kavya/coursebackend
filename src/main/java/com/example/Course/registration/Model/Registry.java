@@ -2,42 +2,35 @@ package com.example.Course.registration.Model;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Data  // Only for getters/setters, not constructors
+@Table(name = "registry")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Registry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    @Email
-    @NotBlank
+    @Email(message = "Email should be valid")
+    @NotBlank(message = "Email cannot be blank")
     private String email;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "courseid", referencedColumnName = "courseid")
+    @JoinColumn(name = "courseid", referencedColumnName = "courseid", nullable = false)
     private Course course;
 
-    // No-args constructor (required by JPA)
-    public Registry() {
-    }
-
-    // Constructor matching your Courseservice usage: new Registry(name, course, email)
+    // Custom constructor for enrollment (without ID)
     public Registry(String name, Course course, String email) {
-        this.name = name;
-        this.email = email;
-        this.course = course;
-    }
-
-    // Full constructor with ID (for other uses)
-    public Registry(Long id, String name, String email, Course course) {
-        this.id = id;
         this.name = name;
         this.email = email;
         this.course = course;
