@@ -1,15 +1,13 @@
 package com.example.Course.registration.Model;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import jakarta.persistence.*;
 
 @Entity
-@Data
-@NoArgsConstructor
+@Data  // Only for getters/setters, not constructors
 public class Registry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,4 +23,23 @@ public class Registry {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "courseid", referencedColumnName = "courseid")
     private Course course;
+
+    // No-args constructor (required by JPA)
+    public Registry() {
+    }
+
+    // Constructor matching your Courseservice usage: new Registry(name, course, email)
+    public Registry(String name, Course course, String email) {
+        this.name = name;
+        this.email = email;
+        this.course = course;
+    }
+
+    // Full constructor with ID (for other uses)
+    public Registry(Long id, String name, String email, Course course) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.course = course;
+    }
 }
