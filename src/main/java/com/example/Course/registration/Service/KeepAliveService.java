@@ -19,7 +19,7 @@ public class KeepAliveService {
     @Scheduled(fixedDelay = 840000)
     public void keepAlive() {
         try {
-            String url = "https://courses-7c6p.onrender.com/Coursereg/api/health"; // Replace with your actual URL
+            String url = "https://courses-7c6p.onrender.com/api/health"; // Replace with your actual URL
             String response = restTemplate.getForObject(url, String.class);
             logger.info("Keep-alive ping successful: " + response);
         } catch (Exception e) {

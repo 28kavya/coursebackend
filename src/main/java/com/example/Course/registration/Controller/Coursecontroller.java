@@ -197,4 +197,10 @@ public class Coursecontroller {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> health() {
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "UP");
+        return ResponseEntity.ok(response);
+    }
 }
