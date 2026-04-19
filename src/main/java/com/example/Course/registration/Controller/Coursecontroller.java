@@ -3,6 +3,7 @@ package com.example.Course.registration.Controller;
 import com.example.Course.registration.Model.Course;
 import com.example.Course.registration.Model.Registry;
 import com.example.Course.registration.Service.Courseservice;
+import com.example.Course.registration.dto.EnrollmentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,13 +69,8 @@ public class Coursecontroller {
      * Get all student enrollments
      */
     @GetMapping("/enrollments")
-    public ResponseEntity<List<Registry>> getAllEnrollments() {
-        try {
-            List<Registry> enrollments = courseservice.enrolledlist();
-            return ResponseEntity.ok(enrollments);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+    public List<EnrollmentResponse> getEnrollments() {
+        return courseservice.enrolledlist();
     }
 
     /**

@@ -4,11 +4,13 @@ import com.example.Course.registration.Model.Course;
 import com.example.Course.registration.Model.Registry;
 import com.example.Course.registration.Repository.Courserepository;
 import com.example.Course.registration.Repository.Registryrepo;
+import com.example.Course.registration.dto.EnrollmentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class Courseservice {
@@ -29,12 +31,20 @@ public class Courseservice {
     /**
      * Get all enrolled students
      * IMPORTANT: Uses @Transactional to keep session open for lazy loading
-     */
-    @Transactional
-    public List<Registry> enrolledlist() {
-        return registryRepository.findAll();
-    }
+*/
 
+    @Transactional
+    public List<EnrollmentResponse> enrolledlist() {
+        return registryRepository.findAll()
+                .stream()
+                .map(registry -> new EnrollmentResponse(
+                        registry.getId(),
+                        registry.getName(),
+                        registry.getEmail(),
+                        registry.getCourse().getCoursename()
+                ))
+                .collect(Collectors.toList());
+    }
     /**
      * Enroll a student in a course
      * @param name Student name
