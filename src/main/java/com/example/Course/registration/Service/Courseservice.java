@@ -28,7 +28,9 @@ public class Courseservice {
 
     /**
      * Get all enrolled students
+     * IMPORTANT: Uses @Transactional to keep session open for lazy loading
      */
+    @Transactional
     public List<Registry> enrolledlist() {
         return registryRepository.findAll();
     }
@@ -61,6 +63,7 @@ public class Courseservice {
      * @param courseid Course ID
      * @return List of registries for that course
      */
+    @Transactional
     public List<Registry> getEnrollmentsByCourse(String courseid) {
         return registryRepository.findByCourseId(courseid);
     }
@@ -70,6 +73,7 @@ public class Courseservice {
      * @param email Student email
      * @return List of registries for that email
      */
+    @Transactional
     public List<Registry> getEnrollmentsByEmail(String email) {
         return registryRepository.findByEmail(email);
     }
@@ -79,6 +83,7 @@ public class Courseservice {
      * @param name Student name (partial)
      * @return List of registries matching the name
      */
+    @Transactional
     public List<Registry> getEnrollmentsByName(String name) {
         return registryRepository.findByNameContainingIgnoreCase(name);
     }
@@ -88,6 +93,7 @@ public class Courseservice {
      * @param registryId Registry ID
      * @return Optional containing the registry if found
      */
+    @Transactional
     public Optional<Registry> getEnrollmentById(Long registryId) {
         return registryRepository.findById(registryId);
     }
@@ -98,6 +104,7 @@ public class Courseservice {
      * @param courseid Course ID
      * @return true if enrolled, false otherwise
      */
+    @Transactional
     public boolean isStudentEnrolledInCourse(String email, String courseid) {
         List<Registry> enrollments = registryRepository.findByEmailAndCourseId(email, courseid);
         return !enrollments.isEmpty();

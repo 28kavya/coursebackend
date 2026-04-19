@@ -25,7 +25,8 @@ public class Registry {
     @NotBlank(message = "Email cannot be blank")
     private String email;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    // CHANGED FROM FetchType.LAZY to FetchType.EAGER
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "courseid", referencedColumnName = "courseid", nullable = false)
     private Course course;
 
