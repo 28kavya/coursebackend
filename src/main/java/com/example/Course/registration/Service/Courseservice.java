@@ -31,20 +31,30 @@ public class Courseservice {
     /**
      * Get all enrolled students
      * IMPORTANT: Uses @Transactional to keep session open for lazy loading
-*/
+     */
+     @Transactional
+     public List<EnrollmentResponse> enrolledlist() {
+         return registryRepository.findAll()
+                 .stream()
+                 .map(registry -> {
 
-    @Transactional
-    public List<EnrollmentResponse> enrolledlist() {
-        return registryRepository.findAll()
-                .stream()
-                .map(registry -> new EnrollmentResponse(
-                        registry.getId(),
-                        registry.getName(),
-                        registry.getEmail(),
-                        registry.getCourse().getCoursename()
-                ))
-                .collect(Collectors.toList());
-    }
+                     String courseName;
+
+                     if (registry.getCourse() != null) {
+                         courseName = registry.getCourse().getCoursename();
+                     } else {
+                         courseName = "Invalid Course"; // fallback
+                     }
+
+                     return new EnrollmentResponse(
+                             registry.getId(),
+                             registry.getName(),
+                             registry.getEmail(),
+                             courseName
+                     );
+                 })
+                 .collect(Collectors.toList());
+     }
     /**
      * Enroll a student in a course
      * @param name Student name
